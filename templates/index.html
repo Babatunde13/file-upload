@@ -1,0 +1,22 @@
+<form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <legend>Upload</legend>
+        <div class="form-group">
+            {{ form.file.label(class='form-control-label') }}
+                {% if form.file.errors %}
+                    {{ form.file(class='form-control-lg form-control') }}
+                        <div class="invalid-feedback">
+                            {% for error in form.file.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+            {% else %}
+                {{ form.file(class='form-control-lg form-control') }}
+            {% endif %}
+        </div>
+    </fieldset>
+    <div class="form-group">
+        {{ form.submit(class='btn btn-outline-info') }}
+    </div>
+</form>
