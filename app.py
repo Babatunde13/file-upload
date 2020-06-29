@@ -47,13 +47,17 @@ def upload():
         db.session.add(newfile)
         db.session.commit()
         return f'{form.file.data.filename} is saved to the database successfully'
-    return render_template('index.html', form=Form())
+    return render_template('index.html', 
+                            form=Form())
 
 
 @app.route('/downloads/<int:id>')
 def download(id):
     file_data = FileStorage.query.get_or_404(id)
-    return send_file(BytesIO(file_data.file), attachment_filename=file_data.name, as_attachment=True)
+    return send_file(BytesIO(file_data.file), 
+                    attachment_filename=file_data.name, 
+                    as_attachment=False)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
